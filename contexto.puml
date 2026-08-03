@@ -1,0 +1,13 @@
+@startuml
+!include <C4/C4_Container>
+
+Person(personAlias, "Gerente Fazenda", "Pesa o gado e registra na tabela")
+Container(containerAlias, "Sistemas de Pesagem", "Aplicativo")
+System(systemAlias, "Label", "Optional Description")
+
+System_Ext(extSystemAlias, "Label", "Optional Description")
+
+Rel(personAlias, containerAlias, "Label", "Optional Technology")
+
+Rel_U(systemAlias, extSystemAlias, "Label", "Optional Technology")
+@enduml
