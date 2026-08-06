@@ -1,13 +1,35 @@
-@startuml
-!include <C4/C4_Container>
+@startuml Diagrama_de_Contexto
 
-Person(personAlias, "Gerente Fazenda", "Pesa o gado e registra na tabela")
-Container(containerAlias, "Sistemas de Pesagem", "Aplicativo")
-System(systemAlias, "Label", "Optional Description")
+' Configurações visuais gerais
+skinparam componentStyle uml2
+skinparam linetype ortho
 
-System_Ext(extSystemAlias, "Label", "Optional Description")
+' Sistema Central (Foco do Diagrama de Contexto)
+package "Sistema em Escopo" {
+  [Sistema de Vendas Online] as sistema #LightBlue
+}
 
-Rel(personAlias, containerAlias, "Label", "Optional Technology")
+' Atores Humanos (Usuários do Sistema)
+actor "Cliente" as cliente
+actor "Administrador" as admin
 
-Rel_U(systemAlias, extSystemAlias, "Label", "Optional Technology")
+' Sistemas Externos com os quais o sistema se integra
+package "Sistemas Externos" {
+  [Gateway de Pagamento] as pagamentos
+  [Sistema de Logística / Correios] as logistica
+  [Serviço de E-mail / Notificação] as notificacoes
+}
+
+' Fluxos de Informação e Interações
+cliente --> sistema : Realiza pedidos e consulta produtos
+admin --> sistema : Gerencia catálogo e relatórios
+
+sistema --> pagamentos : Envia dados de cobrança
+pagamentos --> sistema : Retorna confirmação de pagamento
+
+sistema --> logistica : Envia ordens de envio e endereço
+logistica --> sistema : Atualiza código de rastreio
+
+sistema --> notificacoes : Solicita envio de e-mail de confirmação
+
 @enduml
