@@ -5,7 +5,7 @@ hide circle
 skinparam linetype ortho
 
 ' Definition das Entidades
-entity "CLIENTE" as cliente {
+entity "Usuario" as usuario {
   * id_cliente : INT <<PK>>
   --
   * nome : VARCHAR(100)
@@ -14,7 +14,7 @@ entity "CLIENTE" as cliente {
     telefone : VARCHAR(20)
 }
 
-entity "PEDIDO" as pedido {
+entity "Romaneio" as romaneio {
   * id_pedido : INT <<PK>>
   --
   * id_cliente : INT <<FK>>
@@ -23,26 +23,26 @@ entity "PEDIDO" as pedido {
   * valor_total : DECIMAL(10,2)
 }
 
-entity "ITEM_PEDIDO" as item {
-  * id_item : INT <<PK>>
-  --
-  * id_pedido : INT <<FK>>
-  * id_produto : INT <<FK>>
-  * quantidade : INT
-  * preco_unitario : DECIMAL(10,2)
-}
+' entity "ITEM_PEDIDO" as item {
+'   * id_item : INT <<PK>>
+'   --
+'   * id_pedido : INT <<FK>>
+'   * id_produto : INT <<FK>>
+'   * quantidade : INT
+'   * preco_unitario : DECIMAL(10,2)
+' }
 
-entity "PRODUTO" as produto {
-  * id_produto : INT <<PK>>
-  --
-  * nome : VARCHAR(100)
-  * preco : DECIMAL(10,2)
-    estoque : INT
-}
+' entity "PRODUTO" as produto {
+'   * id_produto : INT <<PK>>
+'   --
+'   * nome : VARCHAR(100)
+'   * preco : DECIMAL(10,2)
+'     estoque : INT
+' }
 
 ' Relacionamentos e Cardinalidades (Crow's Foot)
-cliente ||--o{ pedido : "realiza"
-pedido ||--|{ item : "possui"
-produto ||--o{ item : "está presente em"
+usuario ||--o{ romaneio : "registra"
+' pedido ||--|{ item : "possui"
+' produto ||--o{ item : "está presente em"
 
 @enduml
